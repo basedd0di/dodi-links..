@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Official DODI links page on TikTok, Instagram, and SoundCloud">
+<meta name="keywords" content="Dodi, TikTok, Instagram, SoundCloud, Links">
+<meta name="author" content="Dodi">
+<title>DODI • Links</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Roboto', sans-serif;
+  color: #fff;
+  background: url('background.jpg') no-repeat center center / cover fixed;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 0; }
+.navbar {
+  width: 100%; padding: 15px 30px; display: flex; align-items: center; justify-content: space-between;
+  position: relative; z-index: 2; background: rgba(0,0,0,0.5);
+}
+.navbar h2 { font-size: 24px; text-shadow: 0 0 10px cyan; }
+
+.card {
+  position: relative; z-index: 2; max-width: 400px; margin: auto; margin-top: 60px;
+  padding: 30px; background: rgba(0,0,0,0.6); border-radius: 25px; text-align: center;
+  box-shadow: 0 0 20px rgba(0,255,255,0.3);
+}
+h1 { font-size: 48px; margin-bottom: 20px; text-shadow: 0 0 15px cyan; }
+
+.links { margin-top: 20px; display: flex; flex-direction: column; gap: 15px; }
+.btn {
+  padding: 12px 20px; border-radius: 30px; border: 2px solid cyan; color: cyan; font-weight: bold;
+  text-decoration: none; transition: 0.3s;
+}
+.btn:hover { background: cyan; color: #000; transform: scale(1.05); }
+
+.audio-controls {
+  margin-top: 20px; display: flex; flex-direction: column; gap: 10px; align-items: center;
+}
+.audio-controls button {
+  padding: 8px 14px; border-radius: 10px; border: 2px solid cyan; background: transparent;
+  color: cyan; font-weight: bold; cursor: pointer; transition: 0.3s;
+}
+.audio-controls button:hover { background: cyan; color: #000; transform: scale(1.05); }
+.audio-controls input[type="range"] { width: 80%; }
+
+footer { margin-top: 20px; font-size: 12px; opacity: 0.7; }
+iframe { position: absolute; opacity: 0; width: 1px; height: 1px; border: 0; }
+
+@media (max-width: 480px) {
+  .card { margin-top: 30px; padding: 20px; max-width: 90%; }
+  h1 { font-size: 36px; }
+  .navbar h2 { font-size: 20px; }
+}
+</style>
+</head>
+<body>
+
+<div class="overlay"></div>
+<div class="navbar"><h2>DODI</h2></div>
+
+<div class="card">
+  <h1>DODI</h1>
+  <div class="links">
+    <a class="btn" href="https://www.tiktok.com/@thugangel20ny" target="_blank" rel="noopener noreferrer">TikTok</a>
+    <a class="btn" href="https://www.instagram.com/basedd0di/?hl=fr" target="_blank" rel="noopener noreferrer">Instagram</a>
+    <a class="btn" href="https://soundcloud.com/basedd0di" target="_blank" rel="noopener noreferrer">SoundCloud</a>
+  </div>
+
+  <div class="audio-controls">
+    <button id="playBtn">▶️ Play</button>
+    <button id="pauseBtn">⏸ Pause</button>
+    <input id="volumeSlider" type="range" min="0" max="100" value="50">
+  </div>
+
+  <footer>© <span id="y"></span> DODI</footer>
+</div>
+
+<iframe id="sc-player" 
+src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/diegointhedark/how-i-feel&auto_play=true&hide_related=true&show_comments=false&show_user=false&show_reposts=false&visual=false"
+allow="autoplay">
+</iframe>
+
+<script src="https://w.soundcloud.com/player/api.js"></script>
+<script>
+const iframeElement = document.getElementById('sc-player');
+const widget = SC.Widget(iframeElement);
+
+widget.bind(SC.Widget.Events.READY, function() {
+  widget.setVolume(50);
+  widget.play();
+});
+
+document.getElementById('playBtn').addEventListener('click', () => widget.play());
+document.getElementById('pauseBtn').addEventListener('click', () => widget.pause());
+document.getElementById('volumeSlider').addEventListener('input', (e) => {
+  widget.setVolume(e.target.value);
+});
+
+document.getElementById('y').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
